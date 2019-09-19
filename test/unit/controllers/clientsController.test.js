@@ -1,6 +1,5 @@
 const chai = require('chai');
 const td = require('testdouble');
-const ClientsController = require('../../../src/controllers/ClientsController');
 
 const { expect } = chai;
 
@@ -53,10 +52,10 @@ describe('clientsController', () => {
 			.thenReturn({ valid: true });
 
 		const clientModel = td.replace('../../../src/models/ClientModel');
-		td.when(clientModel.createOne(req.body)).thenResolve({ client: 'client-created' });
+		td.when(clientModel.createOne(req.body, clientModel.hashClient(req.body))).thenResolve({ client: 'client-created' });
 
+		const ClientsController = require('../../../src/controllers/ClientsController');
 		const createOneResult = await ClientsController.createOne(req);
-
 
 		expect(createOneResult)
 			.to.be.an('object')
