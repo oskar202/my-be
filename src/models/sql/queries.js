@@ -6,6 +6,7 @@ const clients = {
 	getOne: new QueryFile(path.join(__dirname, './clients/getOne.sql')),
 	deleteOne: new QueryFile(path.join(__dirname, './clients/deleteOne.sql')),
 	createOne: new QueryFile(path.join(__dirname, './clients/createOne.sql')),
+	updateOne: new QueryFile(path.join(__dirname, './clients/updateOne.sql')),
 };
 
 const queries = {

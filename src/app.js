@@ -1,5 +1,7 @@
 const config = require('config').get('service');
 const express = require('express');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('../public/swagger.json');
 const logger = require('./helpers/logger');
 const path = require('path');
 const requestLogger = require('./middleware/requestLogger');
@@ -7,6 +9,7 @@ const migration = require('./models/migration');
 const { apiRoutes } = require('./routes');
 const { routeErrorHandler, routeNotFoundHandler } = require('./middleware/errorHandlers');
 const { asyncRouteHandler } = require('./middleware/routeHandlers');
+const expressOasGenerator = require('express-oas-generator');
 
 const app = express();
 
@@ -20,6 +23,10 @@ apiRoutes(app);
 // Register API fallback route and error handler
 app.use('/api/*', asyncRouteHandler(routeNotFoundHandler));
 app.use('/api', routeErrorHandler);
+
+// Register Swagger
+expressOasGenerator.init(app, {});
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Migrate DB
 migration(logger);

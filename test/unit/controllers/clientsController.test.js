@@ -76,4 +76,25 @@ describe('clientsController', () => {
 			.that.is.an('string')
 			.that.equals('success');
 	});
+
+	it('#updateOne should update client', async () => {
+		const req = {
+			body: {
+				id: 'some-client-id',
+				firstname: 'John',
+				surname: 'Doe',
+			},
+		};
+		const clientModel = td.replace('../../../src/models/ClientModel');
+		td.when(clientModel.update(req.body, req.params)).thenResolve();
+
+		const ClientsController = require('../../../src/controllers/ClientsController');
+		const updateResult = await ClientsController.updateOne(req);
+
+		expect(updateResult)
+			.to.be.an('object')
+			.and.has.property('message')
+			.that.is.an('string')
+			.that.equals('success');
+	});
 });

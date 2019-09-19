@@ -26,6 +26,11 @@ class ClientModel {
 		return db.none(queries.clients.deleteOne, { clientId });
 	}
 
+	// Update Client
+	static async update(clientData) {
+		return db.none(queries.clients.updateOne, { ...clientData });
+	}
+
 	// Hash client data
 	static hashClient(clientData) {
 		return crypto.createHash('sha256').update(JSON.stringify(clientData)).digest('base64');

@@ -27,10 +27,13 @@
   "dependencies": {
     "config": "^3.0.1",
     "express": "^4.16.4",
+    "express-oas-generator": "^1.0.9",
+    "log": "^6.0.0",
     "pg-promise": "^8.6.4",
     "request": "^2.88.0",
     "request-promise-native": "^1.0.7",
     "swagger-model-validator": "^3.0.8",
+    "swagger-ui-express": "^4.1.0",
     "winston": "^3.2.1"
   },
   "devDependencies": {

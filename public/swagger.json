@@ -2,9 +2,10 @@
   "swagger": "2.0",
   "info": {
     "title": "myjar-test-task-service.js",
-    "description": "MYJAR test-task-service.js"
+    "description": "MYJAR test-task-service.js",
+    "version": "v1"
   },
-  "host": "test.myjar.com",
+  "host": "localhost:3000",
   "schemes": [
     "https"
   ],
@@ -14,21 +15,21 @@
   "produces": [
     "application/json"
   ],
-  "basePath": "/api/myjar-test-task-service/",
+  "basePath": "/",
   "paths": {
     "/api/v1/clients": {
-      "GET": {
+      "get": {
         "summary": "Gets all clients in database",
         "responses": {
           "200": {
             "description": "List of clients or empty array"
-					},
-					"500": {
-						"description": "Something went wrong!"
-					}
+          },
+          "500": {
+            "description": "Something went wrong!"
+          }
         }
-			},
-			"POST": {
+      },
+      "post": {
         "summary": "ClientModel",
         "responses": {
           "200": {
@@ -36,37 +37,56 @@
           }
         }
       }
-		},
-		"/api/v1/clients/{id}": {
-      "GET": {
-				"summary": "ClientModel",
-				"parameters": [
-					{
-						"name": "id",
-						"in": "path",
-						"description": "Client UUID v4",
-						"required": true
-					}
-				],
+    },
+    "/api/v1/clients/{id}": {
+      "get": {
+        "summary": "ClientModel",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Client UUID v4",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Returns client data"
           }
         }
-			},
-			"DELETE": {
-				"summary": "ClientModel",
-				"parameters": [
-					{
-						"name": "id",
-						"in": "path",
-						"description": "Client UUID v4",
-						"required": true
-					}
-				],
+      },
+      "delete": {
+        "summary": "ClientModel",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Client UUID v4",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Returns ok and client is deleted if exists"
+          }
+        }
+      },
+      "put": {
+        "summary": "ClientModel",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Client UUID v4",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns ok and client is updated if exists"
           }
         }
       }
@@ -76,21 +96,25 @@
     "ClientModel": {
       "properties": {
         "firstname": {
-					"type": "string",
-					"minLength": 1,
-					"maxLength": 64
-				},
-				"surname": {
-					"type": "string",
-					"minLength": 1,
-					"maxLength": 64
-				},
-				"phoneNumber": {
-					"type": "string",
-					"pattern": "^\\+4407([0-9]{9,14})"
-				}
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "surname": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "phoneNumber": {
+          "type": "string",
+          "pattern": "^\\+4407([0-9]{9,14})"
+        }
       },
-      "required": ["firstname", "surname", "phoneNumber"]
+      "required": [
+        "firstname",
+        "surname",
+        "phoneNumber"
+      ]
     }
   }
 }

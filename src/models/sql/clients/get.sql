@@ -1,1 +1,1 @@
-select * from public.clients
+select * from public.clients order by firstname

@@ -28,12 +28,30 @@ class ClientsController {
 	// DELETE - Delete a client
 	static async deleteOne(req) {
 		const { clientId } = req.params;
-
 		await ClientModel.deleteById(clientId);
-
 		return { message: 'success' };
 	}
-}
 
+	// UPDATE - Update a client
+	static async updateOne(req) {
+		ClientsController.validate(req.body);
+		await ClientModel.update(req.body);
+		return { message: 'success' };
+	}
+
+	static validate(req) {
+		if (this.checkInputValue(req.firstname)) {
+			throw new Error('error_firstname');
+		}
+		if (this.checkInputValue(req.surname)) {
+			throw new Error('error_surname');
+		}
+		return { message: 'success' };
+	}
+
+	static checkInputValue(field) {
+		return field.length < 1 || field.length > 64 || !/^[a-z]+$/i.test(field);
+	}
+}
 
 module.exports = ClientsController;
