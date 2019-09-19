@@ -2,7 +2,7 @@ const ClientModel = require('../models/ClientModel');
 const validator = require('../helpers/validator');
 const cacher = require('../helpers/cacher');
 
-class clientsController {
+class ClientsController {
 	// GET - Returns a list of clients
 	static async get() {
 		return ClientModel.getList();
@@ -36,4 +36,4 @@ class clientsController {
 }
 
 
-module.exports = clientsController;
+module.exports = ClientsController;
